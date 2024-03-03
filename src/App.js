@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Data from "./components/Data";
+import Error from "./components/Error";
+import Loading from "./components/Loading";
 
-function App() {
+export default function App() {
+  const useData = () => useState(null);
+  const useLoading = () => useState(false);
+  const useError = () => useState(null);
+
+  const { data } = useData();
+  const { loading } = useLoading();
+  const { error } = useError();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {loading ? <Loading /> : error ? <Error /> : <Data data={data} />}
     </div>
   );
 }
-
-export default App;
